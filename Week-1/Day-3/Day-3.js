@@ -3,6 +3,10 @@
 // The function will update the quantity of the item you are passing in.
 // When you have updated the cart then return the new cart.
 
+function modifyArray(arr, item) {
+  return arr.map(cur => cur.product === item ? cur.quantity += 1 : cur.quantity);
+}
+
 let cart = [
   {
     id: 1,
