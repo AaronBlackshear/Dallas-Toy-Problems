@@ -5,7 +5,17 @@
     * Return the total including taxes rounded to two decimal.
 */
 
-// Your code here.
+function precisionRound(number, precision) {
+  var factor = Math.pow(10, precision);
+  return Math.round(number * factor) / factor;
+}
+
+function calcTotal(arr, taxRate) {
+  let price = arr.reduce((acc, cur) => acc + cur.price * cur.quantity, 0);
+  let taxPrice = price * taxRate;
+  let total = price + taxPrice;
+  return precisionRound(total, 2);
+}
 
 let cart = [
   {

@@ -6,7 +6,13 @@
     * Either way, return the array when complete.
 */
 
-// Your code here.
+function removeItem(arr, id) {
+  for(let i = arr.length; i > 0; i--) {
+    if(arr[i].id == id){
+      arr.splice(i, 1);
+    }
+  }
+}
 
 let cart = [
   {
