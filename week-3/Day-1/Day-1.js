@@ -5,22 +5,42 @@ setApp();
 
 app.get("/api/people", (req, res) => {
   /* On this enpoint, return the users array found on the req object with a status of 200 and either the json or send methods.*/
+  res.status(200).json(req.users);
 });
 
 app.get("/api/people/:id", (req, res) => {
   /* Here you are passed a parameter in the url. Using the id parameter find the correct user and return it with a status of 200 using the json or send methods */
+  req.users.map(cur => req.params.id === cur.id && res.status(200).json(cur));
 });
 
 app.put("/api/people/:id", (req, res) => {
   /* Here you are passed a parameter in the url. Using the id parameter find the correct object, and update it with the values passed on the body, then return the updated users array with a status of 200 using the json or send methods */
+  // console.log(req.body);
+  let updatedArr = req.users.map(cur => {
+    if (req.params.id === cur.id) {
+      cur[req.body.prop] = req.body.val;
+      return cur;
+    }
+    return cur;
+  });
+  res.status(200).json(updatedArr);
 });
 
 app.post("/api/people", (req, res) => {
   /* On this endpoint, we will be receiving a new user on the request object. Add this user to the users array then return the updated users array with a status of 200 using the json or send methods */
+  req.users.push(req.body);
+  res.status(200).json(req.users);
 });
 
 app.delete("/api/people/:id", (req, res) => {
   /* Finally, you are passed a parameter in the url. Using the id parameter find the correct object, remove it from the users then return the updated users array with a status of 200 using the json or send methods */
+  var newArr = req.users.filter((cur, ind) => {
+    if (cur.id === req.params.id) {
+      req.users.splice(ind, 1);
+    }
+    return cur;
+  });
+  res.status(200).json(newArr);
 });
 
 console.log(`If you do everything right, this will show up in the console`);
