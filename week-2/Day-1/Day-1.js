@@ -99,3 +99,8 @@ const posts = [
   Once that's completed, organize the collection by the datetime the
     post was made.
 */
+
+function sortByUser(arr, username) {
+  filteredArr = arr.filter(cur => {if(cur.username === username) return cur}).sort((a,b) => Date.parse(a.date) > Date.parse(b.date));
+  return filteredArr;
+}
